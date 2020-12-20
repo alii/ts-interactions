@@ -17,4 +17,5 @@ function validateEnv<T extends string = string>(
 
 export const env = {
   DISCORD_TOKEN: validateEnv("DISCORD_TOKEN"),
+  TEST_GUILD: validateEnv("TEST_GUILD"),
 };

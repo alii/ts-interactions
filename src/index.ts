@@ -6,6 +6,7 @@ import { Client } from "./Client";
 
 const client = new Client([ping], {
   onError: signale.error,
+  testGuildId: env.TEST_GUILD,
 });
 
 client.on("ready", () => {

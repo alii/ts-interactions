@@ -1,6 +1,7 @@
 import { Interaction } from "./structs/Interaction";
+import { EmbedField } from "discord.js";
 
-export type CommandOption = {
+export interface CommandOption {
   type: ApplicationCommandOptionType;
   name: string;
   description: string;
@@ -8,19 +9,20 @@ export type CommandOption = {
   required?: boolean;
   choices?: CommandOptionChoice[];
   options?: CommandOption[];
-};
+}
 
-export type CommandOptionChoice = {
+export interface CommandOptionChoice {
   name: string;
   value: string | number;
-};
+}
 
-export type Command = {
+export interface Command {
   name: string;
   description: string;
   options: CommandOption[];
+
   execute(interaction: Interaction): Promise<unknown>;
-};
+}
 
 export enum ApplicationCommandOptionType {
   __placeholder,
@@ -80,9 +82,9 @@ export interface APIWebhookResponse {
   type: number;
   content: string;
   channel_id: string;
-  author: Author;
+  author: WebhookAuthor;
   attachments: string[];
-  embeds: Embed[];
+  embeds: WebhookEmbed[];
   mentions: unknown[];
   mention_roles: string[];
   pinned: boolean;
@@ -94,7 +96,7 @@ export interface APIWebhookResponse {
   webhook_id: string;
 }
 
-export interface Author {
+export interface WebhookAuthor {
   bot: boolean;
   id: string;
   username: string;
@@ -102,18 +104,12 @@ export interface Author {
   discriminator: string;
 }
 
-export interface Embed {
+export interface WebhookEmbed {
   type: string;
   title: string;
   description: string;
   color: number;
-  fields?: Field[];
-}
-
-export interface Field {
-  name: string;
-  value: string;
-  inline: boolean;
+  fields?: EmbedField[];
 }
 
 export enum InteractionResponseType {
