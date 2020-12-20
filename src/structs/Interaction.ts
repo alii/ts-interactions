@@ -50,7 +50,7 @@ export class Interaction
     content: Webhook.input.POST | string,
     type: InteractionResponseType = InteractionResponseType.ChannelMessageWithSource
   ) {
-    const url = `https://discord.com/api/interactions/${this._data.id}/${this._data.token}/callback`;
+    const url = `/interactions/${this._data.id}/${this._data.token}/callback`;
 
     const data = typeof content === "string" ? { content } : content;
 
@@ -63,7 +63,7 @@ export class Interaction
   }
 
   createFollowup = (content: Webhook.input.POST | string) => {
-    const url = `https://discord.com/api/webhooks/${this.client.user?.id}/${this.token}`;
+    const url = `/webhooks/${this.client.user?.id}/${this.token}`;
 
     return this.fetch(url, {
       body: JSON.stringify(typeof content === "string" ? { content } : content),
@@ -86,7 +86,7 @@ export class InteractionReply extends WithRequest {
     const data = typeof content === "string" ? { content } : content;
 
     return this.fetch(
-      `https://discord.com/api/webhooks/${this.client.user?.id}/${this.interaction.token}/messages/@original`,
+      `/webhooks/${this.client.user?.id}/${this.interaction.token}/messages/@original`,
       {
         method: "PATCH",
         body: JSON.stringify({ type, data }),
@@ -96,7 +96,7 @@ export class InteractionReply extends WithRequest {
 
   delete() {
     return this.fetch(
-      `https://discord.com/api/webhooks/${this.client.user?.id}/${this.interaction.token}/messages/@original`,
+      `/webhooks/${this.client.user?.id}/${this.interaction.token}/messages/@original`,
       {
         method: "DELETE",
       }

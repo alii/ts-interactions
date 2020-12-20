@@ -1,12 +1,12 @@
 import { Base, Client } from "discord.js";
 import fetch, { RequestInit } from "node-fetch";
 
-export class WithRequest extends Base {
-  constructor(client: Client) {
+export abstract class WithRequest extends Base {
+  protected constructor(client: Client) {
     super(client);
   }
 
-  async fetch(url: string, init?: RequestInit) {
+  protected async fetch(endpoint: string, init?: RequestInit) {
     const Authorization = `Bot ${this.client.token}`;
 
     const headers = init?.body
@@ -17,7 +17,7 @@ export class WithRequest extends Base {
         }
       : { ...init?.headers, Authorization };
 
-    return fetch(url, {
+    return fetch(`https://discord.com/api${endpoint}`, {
       ...init,
       headers,
     });

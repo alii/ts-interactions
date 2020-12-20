@@ -4,7 +4,9 @@
     "target": "ESNext",
     "sourceMap": true,
     "esModuleInterop": true,
-    "strict": true
+    "strict": true,
+    "rootDir": "src",
+    "outDir": "dist"
   },
   "exclude": ["node_modules"]
 }

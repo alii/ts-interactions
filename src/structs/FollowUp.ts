@@ -12,7 +12,7 @@ export class FollowUp extends WithRequest {
   }
 
   async edit(newContent: Webhook.input.PATCH | string) {
-    const url = `https://discord.com/api/webhooks/${this.client.user?.id}/${this.interaction.token}/messages/${this._data.id}`;
+    const url = `/webhooks/${this.client.user?.id}/${this.interaction.token}/messages/${this._data.id}`;
 
     return this.fetch(url, {
       method: "PATCH",
